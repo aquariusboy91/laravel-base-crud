@@ -13,7 +13,7 @@
         </div>
         <div class="row">
             <div class="col">
-              <img class="fluid-img" src=" {{$comic->photo }}" alt="{{$comic->name}}">
+              <img class="fluid-img" src=" {{$comic->photo }}" alt="{{$comic->titolo}}">
             </div>
             <div class="col">
               <div>{{ $comic->editore }}</div>

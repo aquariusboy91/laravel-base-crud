@@ -69,9 +69,9 @@ class ComicController extends Controller
             'comic' => $comic,
             'title' => $comic->titolo
         ];
-
-        dd($comic);
+        
         return view('Comic.show', $data);
+      
     }
 
     /**
