@@ -14,7 +14,13 @@ class ComicController extends Controller
      */
     public function index()
     {
-        //
+        $comics = Comic::paginate(5);
+        $data = [
+            'comics' => $comics,
+            'title' => 'Comic Home'
+        ];
+
+        return view('Comic.index', $data);
     }
 
     /**
@@ -24,7 +30,7 @@ class ComicController extends Controller
      */
     public function create()
     {
-        //
+        return view('Comic.create', ['title' => 'Add New Comic']);
     }
 
     /**
@@ -35,7 +41,20 @@ class ComicController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $dataArray = $request->all();
+        //validazione
+        $comic = new Comic();
+        $comic->titolo = $dataArray['titolo'];
+        $comic->editore = $dataArray['editore'];
+        $comic->trama = $dataArray['trama'];
+        $comic->numero = $dataArray['numero'];
+        $comic->photo = $dataArray['photo'];
+        $comic->data_uscita = $dataArray['data_uscita'];
+        $comic->prezzo = $dataArray['prezzo'];
+
+        $save = $comic->save();
+
+        return redirect()->route('Comic.show', $comic->id);
     }
 
     /**
@@ -46,7 +65,13 @@ class ComicController extends Controller
      */
     public function show(Comic $comic)
     {
-        //
+        $data = [
+            'comic' => $comic,
+            'title' => $comic->titolo
+        ];
+
+        dd($comic);
+        return view('Comic.show', $data);
     }
 
     /**
