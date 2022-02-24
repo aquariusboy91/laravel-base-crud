@@ -54,7 +54,8 @@ class ComicController extends Controller
 
         $save = $comic->save();
 
-        return redirect()->route('Comic.show', $comic->id);
+
+        return redirect()->route('comics.show', $comic->id);
     }
 
     /**
@@ -82,7 +83,7 @@ class ComicController extends Controller
      */
     public function edit(Comic $comic)
     {
-        //
+        return view('Comic.edit', ['comic'=> $comic]);
     }
 
     /**
@@ -94,7 +95,9 @@ class ComicController extends Controller
      */
     public function update(Request $request, Comic $comic)
     {
-        //
+        $data = $request->all();
+        $updated = $comic->update($data);
+        return redirect()->route('comics.show', $comic->id);
     }
 
     /**
