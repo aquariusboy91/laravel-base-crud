@@ -16,6 +16,11 @@
         </div>
         <div class="row">
             <div class="col">
+                @if (session('status'))
+                    <div class="alert alert-success">
+                        {{ session('status') }}
+                    </div>
+                @endif
                  <table class="table table-primary">
                     <thead>
                         <tr class="table-primary">
@@ -32,6 +37,14 @@
                             <td>{{ $comic->editore }}</td>
                             <td>{{ $comic->prezzo }} €</td>
                             <td><a class="btn btn-primary" href="{{ route('comics.show', $comic) }}">View</a></td>
+                            <td><a class="btn btn-primary" href="{{ route('comics.edit', $comic) }}">Edit</a></td>
+                            <td>
+                                        <form action="{{ route('comics.destroy', $comic->id) }}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <input class="btn btn-danger" type="submit" value="Delete">
+                                        </form>
+                                    </td>
                         </tr>
                     @endforeach
                     </tbody>
